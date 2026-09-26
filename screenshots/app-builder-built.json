@@ -1,0 +1,38 @@
+{
+  "url": "http://127.0.0.1:8081/",
+  "viewports": {
+    "desktop": {
+      "width": 1280,
+      "height": 800,
+      "status": 200,
+      "title": "Kozmogenez",
+      "hasCanvas": true,
+      "bodyTextLen": 812,
+      "bodyTextHash": "082ee13bb6c50251bd906cc72119af95d7fca6d9ac02989b92d029a32f452b5e",
+      "bodyTextPrefix": "Kozmogenez Büyük Patlama’dan Homo sapiens’e 13,8 milyar yıl önce",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-built.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "title": "Kozmogenez",
+      "hasCanvas": true,
+      "bodyTextLen": 465,
+      "bodyTextHash": "416fe995158260918fcdf61cb5dbaa17d30adf65daf7a9effea332a22fcbcd38",
+      "bodyTextPrefix": "Kozmogenez 13,8 milyar yıl önce 01 / 12Uzay genişler Büyük Patla",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-built-mobile.png"
+    }
+  },
+  "brandWarnings": [],
+  "authWarnings": [],
+  "verdictFile": "/workspace/screenshots/app-builder-built.json",
+  "divergesFromBaseline": false,
+  "baselineReasons": []
+}

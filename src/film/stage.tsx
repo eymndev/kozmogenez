@@ -191,8 +191,6 @@ function paint(
     scale *= 1 + DIVE * leave * leave;
   }
   layer.root.style.transform = `scale(${scale.toFixed(4)})`;
-  const blur = reduced ? 0 : leave * 7;
-  layer.root.style.filter = blur > 0.2 ? `blur(${blur.toFixed(1)}px)` : "";
 
   if (layer.canvas) {
     if (visible) drawScene(layer.canvas, shot, time);
@@ -233,7 +231,8 @@ function drawScene(canvas: HTMLCanvasElement, shot: ShotSpan, time: number) {
   const w = canvas.clientWidth;
   const h = canvas.clientHeight;
   if (w === 0 || h === 0) return;
-  const dpr = Math.min(1.5, window.devicePixelRatio || 1);
+  // Küçük ekranlarda keskinlik için 2×, büyük ekranlarda akıcılık için 1,5× piksel yoğunluğu.
+  const dpr = Math.min(w < 700 ? 2 : 1.5, window.devicePixelRatio || 1);
   const pw = Math.round(w * dpr);
   const ph = Math.round(h * dpr);
   if (canvas.width !== pw || canvas.height !== ph) {
@@ -252,5 +251,6 @@ function drawScene(canvas: HTMLCanvasElement, shot: ShotSpan, time: number) {
     dur: shot.end - shot.start,
     beats: shot.beats,
     s: Math.max(0.6, Math.min(1.4, Math.min(w, h) / 800)),
+    dpr,
   });
 }

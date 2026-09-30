@@ -74,7 +74,9 @@ export const CHAPTERS: Chapter[] = [
     evidence:
       "Uzak galaksilerin ışığı kırmızıya kayar: ne kadar uzaktalarsa o kadar hızlı uzaklaşırlar. Evrendeki hidrojen–helyum oranı da ilk dakikaların çekirdek sentezinin öngördüğü değerle uyuşur.",
     sources: ["Planck İşbirliği (2020), Astronomy & Astrophysics 641, A6"],
-    shots: [{ name: "sahne-patlama", scene: "bigBang", fromBeat: 0, focus: [0.5, 0.5], zoom: [1, 1.03] }],
+    shots: [
+      { name: "sahne-patlama", scene: "bigBang", fromBeat: 0, focus: [0.5, 0.5], zoom: [1, 1.03] },
+    ],
     tone: { chord: [38, 45, 50, 52, 57], brightness: 520 },
   },
   {
@@ -108,7 +110,9 @@ export const CHAPTERS: Chapter[] = [
       "Penzias & Wilson (1965), Astrophysical Journal",
       "Planck İşbirliği (2020), Astronomy & Astrophysics",
     ],
-    shots: [{ name: "sahne-isik", scene: "firstLight", fromBeat: 0, focus: [0.5, 0.5], zoom: [1, 1.03] }],
+    shots: [
+      { name: "sahne-isik", scene: "firstLight", fromBeat: 0, focus: [0.5, 0.5], zoom: [1, 1.03] },
+    ],
     tone: { chord: [41, 48, 53, 57, 60], brightness: 760 },
   },
   {
@@ -139,7 +143,15 @@ export const CHAPTERS: Chapter[] = [
     evidence:
       "James Webb Uzay Teleskobu, Büyük Patlama’dan yalnızca birkaç yüz milyon yıl sonra parlayan galaksileri görüntüledi. 2017’de iki nötron yıldızının çarpışması hem kütleçekim dalgalarıyla hem ışıkla izlendi ve ağır element üretiminin izi yakalandı.",
     sources: ["Abbott vd. (2017), Astrophysical Journal Letters", "Carniani vd. (2024), Nature"],
-    shots: [{ name: "sahne-yildiz", scene: "firstStars", fromBeat: 0, focus: [0.42, 0.5], zoom: [1, 1.03] }],
+    shots: [
+      {
+        name: "sahne-yildiz",
+        scene: "firstStars",
+        fromBeat: 0,
+        focus: [0.42, 0.5],
+        zoom: [1, 1.03],
+      },
+    ],
     tone: { chord: [43, 50, 55, 59, 62], brightness: 900 },
   },
   {
@@ -170,7 +182,9 @@ export const CHAPTERS: Chapter[] = [
     evidence:
       "Gaia uydusu bir milyardan fazla yıldızın konumunu ve hareketini ölçtü. Bu dev harita, Samanyolu’nun hangi parçaların birleşmesiyle büyüdüğünü geriye doğru okumayı sağlıyor: galaktik arkeoloji.",
     sources: ["Helmi vd. (2018), Nature", "Sawala vd. (2025), Nature Astronomy"],
-    shots: [{ name: "galaksi", fromBeat: 0, focus: [0.5, 0.5], zoom: [1.16, 1.02] }],
+    shots: [
+      { name: "sahne-galaksi", scene: "galaxy", fromBeat: 0, focus: [0.5, 0.5], zoom: [1, 1.03] },
+    ],
     tone: { chord: [36, 43, 48, 52, 55, 59], brightness: 820 },
   },
   {
@@ -204,7 +218,9 @@ export const CHAPTERS: Chapter[] = [
       "Connelly vd. (2012), Science",
       "ALMA Ortaklığı (2015), Astrophysical Journal Letters",
     ],
-    shots: [{ name: "gunes", fromBeat: 0, focus: [0.5, 0.5], zoom: [1.22, 1.03] }],
+    shots: [
+      { name: "sahne-gunes", scene: "solar", fromBeat: 0, focus: [0.5, 0.5], zoom: [1, 1.03] },
+    ],
     tone: { chord: [41, 48, 53, 57, 64], brightness: 1100 },
   },
   {
@@ -236,8 +252,7 @@ export const CHAPTERS: Chapter[] = [
       "Apollo’nun getirdiği Ay kayaları, Dünya’nınkilerle neredeyse aynı izotop imzasını taşır. Jack Hills zirkonlarındaki oksijen izotopları, bu kristallerin suyla etkileşmiş bir kabukta oluştuğuna işaret eder.",
     sources: ["Canup & Asphaug (2001), Nature", "Wilde vd. (2001), Nature"],
     shots: [
-      { name: "dunya", fromBeat: 0, focus: [0.4, 0.5], zoom: [1.18, 1.04] },
-      { name: "bacalar", fromBeat: 2, focus: [0.55, 0.55], zoom: [1.04, 1.16] },
+      { name: "sahne-dunya", scene: "earth", fromBeat: 0, focus: [0.5, 0.5], zoom: [1, 1.03] },
     ],
     tone: { chord: [38, 45, 50, 53, 57], brightness: 700 },
   },
@@ -269,7 +284,7 @@ export const CHAPTERS: Chapter[] = [
     evidence:
       "1980’lerde RNA’nın enzim gibi davranabildiği keşfedildi ve bu buluş 1989 Nobel Kimya Ödülü’nü getirdi. Laboratuvarda, RNA yapı taşlarının erken Dünya’ya benzer koşullarda basit moleküllerden oluşabildiği gösterildi.",
     sources: ["Gilbert (1986), Nature", "Powner, Gerland & Sutherland (2009), Nature"],
-    shots: [{ name: "rna", fromBeat: 0, focus: [0.6, 0.55], zoom: [1.04, 1.16] }],
+    shots: [{ name: "sahne-rna", scene: "rna", fromBeat: 0, focus: [0.5, 0.5], zoom: [1, 1.03] }],
     tone: { chord: [34, 41, 46, 50, 53], brightness: 640 },
   },
   {
@@ -300,7 +315,7 @@ export const CHAPTERS: Chapter[] = [
     evidence:
       "Bugünkü canlıların genleri karşılaştırılıp soy ağacı geriye doğru sarılarak ortak atada hangi genlerin bulunduğu tahmin edilir. Moleküler saatler, bu ayrılmaların kabaca ne zaman olduğunu hesaplar.",
     sources: ["Moody vd. (2024), Nature Ecology & Evolution"],
-    shots: [{ name: "dna", fromBeat: 0, focus: [0.3, 0.5], zoom: [1.12, 1.02] }],
+    shots: [{ name: "sahne-dna", scene: "luca", fromBeat: 0, focus: [0.5, 0.5], zoom: [1, 1.03] }],
     tone: { chord: [36, 43, 48, 50, 55], brightness: 780 },
   },
   {
@@ -334,7 +349,9 @@ export const CHAPTERS: Chapter[] = [
       "Sagan (Margulis) (1967), Journal of Theoretical Biology",
       "Lyons, Reinhard & Planavsky (2014), Nature",
     ],
-    shots: [{ name: "hucre", fromBeat: 0, focus: [0.45, 0.5], zoom: [1.16, 1.02] }],
+    shots: [
+      { name: "sahne-oksijen", scene: "oxygen", fromBeat: 0, focus: [0.5, 0.5], zoom: [1, 1.03] },
+    ],
     tone: { chord: [33, 40, 45, 48, 52], brightness: 860 },
   },
   {
@@ -365,10 +382,7 @@ export const CHAPTERS: Chapter[] = [
     evidence:
       "Kanada’daki Burgess Şeyli ve Çin’deki Chengjiang yatakları Kambriyen hayvanlarını yumuşak dokularıyla birlikte korudu. Tiktaalik, tam da öngörülen yaştaki (yaklaşık 375 milyon yıl) kayalarda aranarak bulundu.",
     sources: ["Daeschler, Shubin & Jenkins (2006), Nature"],
-    shots: [
-      { name: "kambriyen", fromBeat: 0, focus: [0.5, 0.55], zoom: [1.04, 1.15] },
-      { name: "kita", fromBeat: 2, focus: [0.62, 0.6], zoom: [1.14, 1.03] },
-    ],
+    shots: [{ name: "sahne-kara", scene: "land", fromBeat: 0, focus: [0.5, 0.5], zoom: [1, 1.03] }],
     tone: { chord: [41, 48, 53, 55, 60], brightness: 980 },
   },
   {
@@ -399,10 +413,7 @@ export const CHAPTERS: Chapter[] = [
     evidence:
       "1980’de Alvarez ekibi, Kretase–Paleojen sınırındaki kilde olağandışı miktarda iridyum buldu. Krater 1990’larda Yucatán’da gömülü olarak tanımlandı; şok kuvars ve cam boncuklar aynı darbeyi doğrular.",
     sources: ["Alvarez vd. (1980), Science", "Schulte vd. (2010), Science"],
-    shots: [
-      { name: "dino", fromBeat: 0, focus: [0.56, 0.45], zoom: [1.03, 1.14] },
-      { name: "carpisma", fromBeat: 1, focus: [0.5, 0.55], zoom: [1.16, 1.03] },
-    ],
+    shots: [{ name: "sahne-dino", scene: "dino", fromBeat: 0, focus: [0.5, 0.5], zoom: [1, 1.03] }],
     tone: { chord: [34, 41, 46, 49, 53], brightness: 600 },
   },
   {
@@ -433,7 +444,9 @@ export const CHAPTERS: Chapter[] = [
     evidence:
       "Fas’taki Jebel Irhoud fosilleri, Homo sapiens kaydını yaklaşık 300 bin yıl geriye taşıdı. Fosil kemiklerden okunan antik DNA, Neandertallerle melezleşmeyi doğrudan gösterdi; bu çalışmalar Svante Pääbo’ya 2022 Nobel Ödülü’nü getirdi.",
     sources: ["Hublin vd. (2017), Nature", "Green vd. (2010), Science"],
-    shots: [{ name: "insan", fromBeat: 0, focus: [0.5, 0.6], zoom: [1.14, 1.02] }],
+    shots: [
+      { name: "sahne-insan", scene: "human", fromBeat: 0, focus: [0.5, 0.5], zoom: [1, 1.03] },
+    ],
     tone: { chord: [38, 45, 50, 54, 57, 62], brightness: 1000 },
   },
 ];

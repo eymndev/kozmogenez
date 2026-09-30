@@ -14,8 +14,16 @@ import { cn } from "@/lib/cn";
 const KEY_TIME = "kozmogenez:t";
 const KEY_MUTED = "kozmogenez:muted";
 
-/** Göktaşının Yucatán’a çarptığı an: "Dinozorlar" bölümünün ikinci cümlesi. */
-const IMPACT = SPANS[CHAPTERS.findIndex((c) => c.id === "dino")].beats[1].start;
+const beatAt = (id: string, beat: number, offset: number) =>
+  SPANS[CHAPTERS.findIndex((c) => c.id === id)].beats[beat].start + offset;
+
+/** Derin gümbürtü: sahnelerdeki büyük çarpışma ve patlamalarla aynı anda. */
+const BOOMS = [
+  0.12, // Büyük Patlama: ekran ısınmaya başlar
+  beatAt("yildiz", 2, 0.3), // süpernova
+  beatAt("dunya", 0, 2.2), // Theia çarpışması
+  beatAt("dino", 1, 1.6), // Chicxulub
+];
 
 function readStore(key: string): string | null {
   try {
@@ -117,7 +125,7 @@ export function Film() {
     return engine.onFrame((time, prev) => {
       if (!engine.playing || time <= prev || time - prev > 0.5) return;
       const crossed = (at: number) => prev < at && time >= at;
-      if (crossed(0.12) || crossed(IMPACT)) score.boom();
+      if (BOOMS.some(crossed)) score.boom();
       for (let i = 1; i < SPANS.length; i++) {
         if (crossed(SPANS[i].start + 0.05)) score.chime();
       }

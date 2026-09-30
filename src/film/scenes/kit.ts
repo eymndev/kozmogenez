@@ -14,6 +14,8 @@ export type SceneFrame = {
   beats: number[];
   /** Kısa kenara göre ölçek: 800 px için 1. */
   s: number;
+  /** Tuvalin piksel yoğunluğu; önbellekli katmanlar bununla çizilir. */
+  dpr: number;
 };
 
 export type Scene = (f: SceneFrame) => void;
@@ -69,7 +71,11 @@ export function dot(ctx: Ctx, x: number, y: number, r: number, color: string) {
   ctx.fill();
 }
 
-/** Belgesel grafiği tarzında küçük etiket: nokta, ince çizgi ve yazı. */
+/**
+ * Belgesel grafiği tarzında etiket: önce nokta belirir, çizgi uzar, sonra yazı kayarak
+ * gelir. `alpha` 0→1 ilerlemedir; geri giderken aynı hareket tersine oynar. `reach` çizgiyi
+ * uzatır: büyük, hareketli canlılarda yazı gövdenin dışında kalsın diye.
+ */
 export function callout(
   f: SceneFrame,
   x: number,
@@ -78,31 +84,48 @@ export function callout(
   alpha: number,
   dir: 1 | -1 = 1,
   sub?: string,
+  reach = 1,
 ) {
   if (alpha <= 0.01) return;
   const { ctx, s } = f;
-  const len = 34 * s;
+  const p = clamp01(alpha);
+  const lineK = 1 - (1 - clamp01(p / 0.55)) ** 3;
+  const textA = clamp01((p - 0.35) / 0.65);
+  const len = 36 * s * reach;
   const ex = x + dir * len;
   const ey = y - len * 0.6;
   ctx.save();
-  ctx.globalAlpha = alpha;
-  ctx.strokeStyle = "rgba(243,238,226,0.7)";
-  ctx.lineWidth = Math.max(1, 1 * s);
+  ctx.lineCap = "round";
+  ctx.strokeStyle = `rgba(255,250,240,${0.85 * Math.min(1, p * 2)})`;
+  ctx.lineWidth = Math.max(1.2, 1.4 * s);
   ctx.beginPath();
   ctx.moveTo(x, y);
-  ctx.lineTo(ex, ey);
-  ctx.lineTo(ex + dir * 10 * s, ey);
+  const k1 = Math.min(1, lineK * 1.6);
+  ctx.lineTo(x + (ex - x) * k1, y + (ey - y) * k1);
+  if (lineK > 0.62) {
+    const k2 = (lineK - 0.62) / 0.38;
+    ctx.lineTo(ex + dir * 12 * s * k2, ey);
+  }
   ctx.stroke();
-  dot(ctx, x, y, 2.2 * s, "rgba(243,238,226,0.9)");
-  ctx.fillStyle = "rgba(243,238,226,0.95)";
-  ctx.font = `500 ${Math.round(Math.max(11, 13 * s))}px Outfit, system-ui, sans-serif`;
-  ctx.textAlign = dir === 1 ? "left" : "right";
-  ctx.textBaseline = "middle";
-  ctx.fillText(text, ex + dir * 14 * s, ey);
-  if (sub) {
-    ctx.fillStyle = "rgba(168,161,148,0.95)";
-    ctx.font = `400 ${Math.round(Math.max(10, 11.5 * s))}px Outfit, system-ui, sans-serif`;
-    ctx.fillText(sub, ex + dir * 14 * s, ey + 15 * s);
+  ctx.fillStyle = "rgba(255,250,240,0.95)";
+  ctx.beginPath();
+  ctx.arc(x, y, 2.6 * s * Math.min(1, p * 3), 0, Math.PI * 2);
+  ctx.fill();
+  if (textA > 0.01) {
+    const slide = (1 - textA) * 10 * s * dir;
+    ctx.globalAlpha = textA;
+    ctx.shadowColor = "rgba(0,0,0,0.55)";
+    ctx.shadowBlur = 6 * s;
+    ctx.fillStyle = "rgba(255,250,240,0.98)";
+    ctx.font = `600 ${Math.round(Math.max(12, 14 * s))}px Outfit, system-ui, sans-serif`;
+    ctx.textAlign = dir === 1 ? "left" : "right";
+    ctx.textBaseline = "middle";
+    ctx.fillText(text, ex + dir * 17 * s - slide, ey);
+    if (sub) {
+      ctx.fillStyle = "rgba(225,220,210,0.9)";
+      ctx.font = `400 ${Math.round(Math.max(10.5, 12 * s))}px Outfit, system-ui, sans-serif`;
+      ctx.fillText(sub, ex + dir * 17 * s - slide, ey + 16 * s);
+    }
   }
   ctx.restore();
 }

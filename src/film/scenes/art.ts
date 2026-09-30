@@ -211,9 +211,11 @@ export function sheet(
   let c = layers.get(k);
   if (!c) {
     if (layers.size > 40) layers.clear();
-    c = canvas(W * f.dpr, H * f.dpr);
+    // Çok geniş ekranlarda tarayıcıların tuval sınırını aşmasın: kenar başına en çok 8192 piksel.
+    const q = Math.min(f.dpr, 8192 / Math.max(1, W), 8192 / Math.max(1, H));
+    c = canvas(W * q, H * q);
     const g = c.getContext("2d")!;
-    g.scale(f.dpr, f.dpr);
+    g.scale(q, q);
     g.translate(-x0, -y0);
     draw(g);
     layers.set(k, c);

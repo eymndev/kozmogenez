@@ -1,3 +1,5 @@
+import type { SceneId } from "@/film/scenes";
+
 /**
  * Filmin içeriği: bölümler, anlatı cümleleri, çekimler ve kaynaklar.
  * Zamanlama burada yazılmaz; `timeline.ts` metin uzunluğundan hesaplar.
@@ -7,8 +9,10 @@
 export type Beat = { text: string; ya: number };
 
 export type Shot = {
-  /** `/cosmos/{name}.mp4` ve `/cosmos/{name}.jpg` */
+  /** `/cosmos/{name}.mp4` ve `/cosmos/{name}.jpg`; kodla çizilen sahnede yalnızca küçük resim adı. */
   name: string;
+  /** Varsa video yerine kodla çizilen bilimsel canlandırma. */
+  scene?: SceneId;
   /** Bu çekimin başladığı anlatı cümlesi. */
   fromBeat: number;
   /** Dikey ekranlarda kırpma odağı (0–1). */
@@ -70,7 +74,7 @@ export const CHAPTERS: Chapter[] = [
     evidence:
       "Uzak galaksilerin ışığı kırmızıya kayar: ne kadar uzaktalarsa o kadar hızlı uzaklaşırlar. Evrendeki hidrojen–helyum oranı da ilk dakikaların çekirdek sentezinin öngördüğü değerle uyuşur.",
     sources: ["Planck İşbirliği (2020), Astronomy & Astrophysics 641, A6"],
-    shots: [{ name: "patlama", fromBeat: 0, focus: [0.5, 0.5], zoom: [1.14, 1.02] }],
+    shots: [{ name: "sahne-patlama", scene: "bigBang", fromBeat: 0, focus: [0.5, 0.5], zoom: [1, 1.03] }],
     tone: { chord: [38, 45, 50, 52, 57], brightness: 520 },
   },
   {
@@ -104,7 +108,7 @@ export const CHAPTERS: Chapter[] = [
       "Penzias & Wilson (1965), Astrophysical Journal",
       "Planck İşbirliği (2020), Astronomy & Astrophysics",
     ],
-    shots: [{ name: "isik", fromBeat: 0, focus: [0.5, 0.5], zoom: [1.02, 1.14] }],
+    shots: [{ name: "sahne-isik", scene: "firstLight", fromBeat: 0, focus: [0.5, 0.5], zoom: [1, 1.03] }],
     tone: { chord: [41, 48, 53, 57, 60], brightness: 760 },
   },
   {
@@ -135,7 +139,7 @@ export const CHAPTERS: Chapter[] = [
     evidence:
       "James Webb Uzay Teleskobu, Büyük Patlama’dan yalnızca birkaç yüz milyon yıl sonra parlayan galaksileri görüntüledi. 2017’de iki nötron yıldızının çarpışması hem kütleçekim dalgalarıyla hem ışıkla izlendi ve ağır element üretiminin izi yakalandı.",
     sources: ["Abbott vd. (2017), Astrophysical Journal Letters", "Carniani vd. (2024), Nature"],
-    shots: [{ name: "yildiz", fromBeat: 0, focus: [0.42, 0.5], zoom: [1.03, 1.16] }],
+    shots: [{ name: "sahne-yildiz", scene: "firstStars", fromBeat: 0, focus: [0.42, 0.5], zoom: [1, 1.03] }],
     tone: { chord: [43, 50, 55, 59, 62], brightness: 900 },
   },
   {

@@ -206,3 +206,58 @@ export function nearest(
   }
   return best;
 }
+
+/** Serbest metin: sahnede sabit bir yere küçük yazı. */
+export function text(
+  f: SceneFrame,
+  x: number,
+  y: number,
+  value: string,
+  alpha: number,
+  opts: { align?: CanvasTextAlign; size?: number; weight?: number; color?: string } = {},
+) {
+  if (alpha <= 0.01) return;
+  const { ctx, s } = f;
+  ctx.save();
+  ctx.globalAlpha = alpha;
+  ctx.fillStyle = opts.color ?? "rgba(243,238,226,0.95)";
+  ctx.font = `${opts.weight ?? 500} ${Math.round(Math.max(10, (opts.size ?? 13) * s))}px Outfit, system-ui, sans-serif`;
+  ctx.textAlign = opts.align ?? "center";
+  ctx.textBaseline = "middle";
+  ctx.fillText(value, x, y);
+  ctx.restore();
+}
+
+/** Işıklandırılmış küre: üst sol parlak, alt sağ gölgede. */
+export function sphere(
+  ctx: Ctx,
+  x: number,
+  y: number,
+  r: number,
+  light: string,
+  mid: string,
+  dark: string,
+) {
+  const g = ctx.createRadialGradient(x - r * 0.35, y - r * 0.35, r * 0.05, x, y, r);
+  g.addColorStop(0, light);
+  g.addColorStop(0.6, mid);
+  g.addColorStop(1, dark);
+  ctx.fillStyle = g;
+  ctx.beginPath();
+  ctx.arc(x, y, r, 0, Math.PI * 2);
+  ctx.fill();
+}
+
+/**
+ * Büyük şemalar (ağaçlar, grafikler) için güvenli kutu: yatay ekranda sağ tarafta,
+ * altyazıların yanında; dikey ekranda sahnenin tamamında.
+ */
+export function board(f: SceneFrame): { x0: number; y0: number; x1: number; y1: number } {
+  if (f.w < f.h) return { x0: f.w * 0.08, y0: f.h * 0.16, x1: f.w * 0.92, y1: f.h * 0.86 };
+  return { x0: f.w * 0.5, y0: f.h * 0.2, x1: f.w * 0.95, y1: f.h * 0.8 };
+}
+
+export function fill(f: SceneFrame, color: string) {
+  f.ctx.fillStyle = color;
+  f.ctx.fillRect(0, 0, f.w, f.h);
+}

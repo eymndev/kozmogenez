@@ -146,8 +146,9 @@ export function Outro({ onReplay, onChapters }: { onReplay: () => void; onChapte
           </ul>
         </details>
         <p className="mt-6 text-xs leading-relaxed text-muted/80">
-          Tarihler yaklaşıktır; yeni fosiller ve ölçümlerle güncellenir. Görüntüler yapay zekâ ile
-          üretilmiş canlandırmalardır. Evrim bir merdiven değil, dallanan bir ağaçtır.
+          Tarihler yaklaşıktır; yeni fosiller ve ölçümlerle güncellenir. Görseller bilimsel
+          bulgulara dayanan, kodla çizilmiş canlandırmalardır; gökyüzü haritası bir simülasyondur.
+          Evrim bir merdiven değil, dallanan bir ağaçtır.
         </p>
       </div>
     </div>

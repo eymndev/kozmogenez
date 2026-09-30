@@ -4,6 +4,7 @@ import { SHOTS } from "@/film/timeline";
 export function preloadPosters() {
   const load = () => {
     for (const shot of SHOTS) {
+      if (shot.scene) continue;
       const img = new Image();
       img.decoding = "async";
       img.src = `/cosmos/${shot.name}.jpg`;

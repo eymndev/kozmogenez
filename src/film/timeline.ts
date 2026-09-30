@@ -1,9 +1,10 @@
 import { CHAPTERS, UNIVERSE_AGE, type Chapter } from "@/film/chapters";
+import type { SceneId } from "@/film/scenes";
 
 /** Her bölümün başında, altyazılardan önce gösterilen başlık kartının süresi. */
 export const CARD = 3.2;
 /** Çekimler arası geçişin yarı süresi (sn). */
-export const FADE = 1.1;
+export const FADE = 1.5;
 /** Kaynak videoların süresi; hepsi 10 sn’lik klipler. */
 export const CLIP_SECONDS = 10.04;
 
@@ -26,6 +27,9 @@ export type ShotSpan = {
   holdUntil: number;
   focus: [number, number];
   zoom: [number, number];
+  scene?: SceneId;
+  /** Bölümün anlatı cümlelerinin bu çekimin başına göre başlangıçları (sn). */
+  beats: number[];
 };
 
 /** Okuma hızına göre cümle süresi: kısa cümle kısa, uzun cümle uzun kalır. */
@@ -71,6 +75,8 @@ export const SHOTS: ShotSpan[] = (() => {
         holdUntil: shot.fromBeat === 0 ? span.cardEnd : start,
         focus: shot.focus,
         zoom: shot.zoom,
+        scene: shot.scene,
+        beats: span.beats.map((b) => b.start - start),
       });
     });
   });

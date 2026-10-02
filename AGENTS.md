@@ -188,6 +188,12 @@ with `--omit=dev`, so runtime code must not depend on `devDependencies`).
 `.vercel/output/` is build output and is git-ignored. No env vars or secrets
 are needed; never commit a `.env` file.
 
+Vercel refuses to deploy versions of `@tanstack/react-start` with known
+vulnerabilities (the 1.168.58 XSS advisory blocked deploys). Keep
+`@tanstack/react-start`, `@tanstack/react-router` and `@tanstack/router-plugin`
+updated together (currently 1.168.60 / 1.170.41 / 1.168.42). Never set
+`DANGEROUSLY_DEPLOY_VULNERABLE_TANSTACK_START_XSS` to get around it.
+
 ---
 
 ## Platform files (from the Grok App Builder export)
